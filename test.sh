@@ -3,6 +3,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 nvm install --lts
 npm install
 
+set -e  # Exit immediately if any command fails
+
 # Spawn Bitcoind, and provide execution permission.
 docker compose up -d
 chmod +x ./bash/run-bash.sh
