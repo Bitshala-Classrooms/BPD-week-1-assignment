@@ -9,6 +9,13 @@ set -e  # Exit immediately if any command fails
 docker compose up -d
 mkdir -p logs
 docker compose logs -f > logs/docker.log 2>&1 &
+cleanup() {
+  exit_code=$?
+  docker compose down -v
+  exit $exit_code
+}
+trap cleanup EXIT
+
 chmod +x ./bash/run-bash.sh
 chmod +x ./python/run-python.sh
 chmod +x ./javascript/run-javascript.sh
@@ -18,6 +25,3 @@ chmod +x ./run.sh
 # Run the test scripts
 /bin/bash run.sh
 npm run test
-
-# Stop the docker.
-docker compose down -v
