@@ -7,6 +7,8 @@ set -e  # Exit immediately if any command fails
 
 # Spawn Bitcoind, and provide execution permission.
 docker compose up -d
+mkdir -p logs
+docker compose logs -f > logs/docker.log 2>&1 &
 chmod +x ./bash/run-bash.sh
 chmod +x ./python/run-python.sh
 chmod +x ./javascript/run-javascript.sh
